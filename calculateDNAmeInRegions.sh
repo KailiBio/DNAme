@@ -77,32 +77,32 @@ if [ ${strand} == "1" ];then
 	if [ "$input_2" = "NA" ]; then
 
 		# 2. remove low coverage CpG sites
-		echo "remove CpG sites with less than 5 reads coverage"
+		echo "remove CpG sites with less than 5 reads coverage" ;
 		aveMethy_1=`awk '{FS=OFS="\t"}{if($10>5){sum+=$11}}END{print sum/(100*NR)}' ${input_1}` ;
 		awk 'BEGIN{FS=OFS="\t"} {if($10>5){print $1,$2,$3,$4,$11/100,$6}}' ${input_1} > temp_${prefix}_raw_methy_1.txt ;
 
 		# 3. calculate DNA methylation level of given region in each file
-		echo "DNAme in files"
+		echo "DNAme in files" ;
 		intersectBed -a ${prefix}_cg_count_merge.txt -b temp_${prefix}_raw_methy_1.txt -s -wa -wb | \
 		awk -v aveMethy="$aveMethy_1" 'BEGIN{FS=OFS="\t"}{sm[$4]+=$12;sn[$4]+=1}END{for(i in sm){if(sn[i]){print i,sn[i],sm[i]/sn[i]}else{print i,0,aveMethy}}}' \
 		> ${prefix}_CG_methy_count_1.txt ;
 
 		# 4. fix
-		echo "fix..."
+		echo "fix..." ;
 		awk '{FS=OFS="\t"}{if(NR==FNR){a[$1]=$2;b[$1]=$3}else{if($7==0){print $0,"NA"}else if(($7!=0)&&(a[$4]==0)){print $0,-0.1}else{print $0,b[$4]}}}' \
 		${prefix}_CG_methy_count_1.txt ${prefix}_cg_count_merge.txt > ${prefix}_cg_DNAme.txt ;
 
 	else
 
 		# 2. clean methyl data
-		echo "remove CpG sites with less than 5 reads coverage"
+		echo "remove CpG sites with less than 5 reads coverage" ;
 		aveMethy_1=`awk '{FS=OFS="\t"}{if($10>5){sum+=$11}}END{print sum/(100*NR)}' ${input_1}` ;
 		awk 'BEGIN{FS=OFS="\t"} {if($10>5){print $1,$2,$3,$4,$11/100,$6}}' ${input_1} > temp_${prefix}_raw_methy_1.txt ;
 		aveMethy_2=`awk '{FS=OFS="\t"}{if($10>5){sum+=$11}}END{print sum/(100*NR)}' ${input_2}` ;
 		awk 'BEGIN{FS=OFS="\t"} {if($10>5){print $1,$2,$3,$4,$11/100,$6}}' ${input_2} > temp_${prefix}_raw_methy_2.txt ;
 
 		# 3. calculate DNA methylation level of given region in each file
-		echo "DNAme in files"
+		echo "DNAme in files" ;
 		intersectBed -a ${prefix}_cg_count_merge.txt -b temp_${prefix}_raw_methy_1.txt -s -wa -wb | \
 		awk -v aveMethy="$aveMethy_1" 'BEGIN{FS=OFS="\t"}{sm[$4]+=$12;sn[$4]+=1}END{for(i in sm){if(sn[i]){print i,sn[i],sm[i]/sn[i]}else{print i,0,aveMethy}}}' \
 		> ${prefix}_CG_methy_count_1.txt ;
@@ -113,7 +113,7 @@ if [ ${strand} == "1" ];then
 		${prefix}_CG_methy_count_2.txt > ${prefix}_CG_methy_count.txt ;
 
 		# 4. fix
-		echo "fix..."
+		echo "fix..." ;
 		awk '{FS=OFS="\t"}{if(NR==FNR){a[$4]=$7}else{if((a[$1]!=0)&&($2==0)&&($4==0)){print $1,-0.1}else if((a[$1]!=0)&&($2==0)&&($4!=0)){print $1,$5}else if((a[$1]!=0)&&($2!=0)&&($4==0)){print $1,$3}else{print $1,$6}}}' \
 		${prefix}_cg_count_merge.txt ${prefix}_CG_methy_count.txt > ${prefix}_CG_methy_count_fix.txt ;
 		awk '{FS=OFS="\t"}{if(NR==FNR){a[$1]=$2}else{if($4 in a){print $0,a[$4]}else{if($5==0){print $0,"NA"}else{print $0,-0.1}}}}' \
@@ -126,32 +126,32 @@ else
 	if [ "$input_2" = "NA" ]; then
 
 		# 2. remove low coverage CpG sites
-		echo "remove CpG sites with less than 5 reads coverage"
+		echo "remove CpG sites with less than 5 reads coverage" ;
 		aveMethy_1=`awk '{FS=OFS="\t"}{if($10>5){sum+=$11}}END{print sum/(100*NR)}' ${input_1}` ;
 		awk 'BEGIN{FS=OFS="\t"} {if($10>5){print $1,$2,$3,$4,$11/100,$6}}' ${input_1} > temp_${prefix}_raw_methy_1.txt ;
 
 		# 3. calculate DNA methylation level of given region in each file
-		echo "DNAme in files"
+		echo "DNAme in files" ;
 		intersectBed -a ${prefix}_cg_count_merge.txt -b temp_${prefix}_raw_methy_1.txt -wa -wb | \
 		awk -v aveMethy="$aveMethy_1" 'BEGIN{FS=OFS="\t"}{sm[$4]+=$12;sn[$4]+=1}END{for(i in sm){if(sn[i]){print i,sn[i],sm[i]/sn[i]}else{print i,0,aveMethy}}}' \
 		> ${prefix}_CG_methy_count_1.txt ;
 
 		# 4. fix
-		echo "fix..."
+		echo "fix..." ;
 		awk '{FS=OFS="\t"}{if(NR==FNR){a[$1]=$2;b[$1]=$3}else{if($7==0){print $0,"NA"}else if(($7!=0)&&(a[$4]==0)){print $0,-0.1}else{print $0,b[$4]}}}' \
 		${prefix}_CG_methy_count_1.txt ${prefix}_cg_count_merge.txt > ${prefix}_cg_DNAme.txt ;
 
 	else
 
 		# 2. clean methyl data
-		echo "remove CpG sites with less than 5 reads coverage"
+		echo "remove CpG sites with less than 5 reads coverage" ;
 		aveMethy_1=`awk '{FS=OFS="\t"}{if($10>5){sum+=$11}}END{print sum/(100*NR)}' ${input_1}` ;
 		awk 'BEGIN{FS=OFS="\t"} {if($10>5){print $1,$2,$3,$4,$11/100,$6}}' ${input_1} > temp_${prefix}_raw_methy_1.txt ;
 		aveMethy_2=`awk '{FS=OFS="\t"}{if($10>5){sum+=$11}}END{print sum/(100*NR)}' ${input_2}` ;
 		awk 'BEGIN{FS=OFS="\t"} {if($10>5){print $1,$2,$3,$4,$11/100,$6}}' ${input_2} > temp_${prefix}_raw_methy_2.txt ;
 
 		# 3. calculate DNA methylation level of given region in each file
-		echo "DNAme in files"
+		echo "DNAme in files" ;
 		intersectBed -a ${prefix}_cg_count_merge.txt -b temp_${prefix}_raw_methy_1.txt -wa -wb | \
 		awk -v aveMethy="$aveMethy_1" 'BEGIN{FS=OFS="\t"}{sm[$4]+=$12;sn[$4]+=1}END{for(i in sm){if(sn[i]){print i,sn[i],sm[i]/sn[i]}else{print i,0,aveMethy}}}' \
 		> ${prefix}_CG_methy_count_1.txt ;
@@ -162,7 +162,7 @@ else
 		${prefix}_CG_methy_count_2.txt > ${prefix}_CG_methy_count.txt ;
 
 		# 4. fix
-		echo "fix..."
+		echo "fix..." ;
 		awk '{FS=OFS="\t"}{if(NR==FNR){a[$4]=$7}else{if((a[$1]!=0)&&($2==0)&&($4==0)){print $1,-0.1}else if((a[$1]!=0)&&($2==0)&&($4!=0)){print $1,$5}else if((a[$1]!=0)&&($2!=0)&&($4==0)){print $1,$3}else{print $1,$6}}}' \
 		${prefix}_cg_count_merge.txt ${prefix}_CG_methy_count.txt > ${prefix}_CG_methy_count_fix.txt ;
 		awk '{FS=OFS="\t"}{if(NR==FNR){a[$1]=$2}else{if($4 in a){print $0,a[$4]}else{if($5==0){print $0,"NA"}else{print $0,-0.1}}}}' \

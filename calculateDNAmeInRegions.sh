@@ -177,13 +177,13 @@ rm temp_${prefix}_*
 
 echo ""
 echo ""
-echo -e "\033[32m  Cheers!!!✌️ ✌️ ✌️ \033[0m"
+echo "\033[32m  Cheers!!!✌️ ✌️ ✌️ \033[0m"
 echo ""
 echo ""
 
 #########################
-echo -e "\033[32m ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^\033[0m"
+echo "\033[32m ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^\033[0m"
 end=$(date +%Y-%m-%d\ %H:%M:%S)
-echo -e "\033[32m END@ "$end" \033[0m"
-echo -e "\033[32m Time used: $((${SECONDS} / 3600))h $((${SECONDS} / 60))m \033[0m"
-echo -e "\033[32m ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^\033[0m"
+echo "\033[32m END@ "$end" \033[0m"
+echo "\033[32m Time used: $((${SECONDS} / 3600))h $((${SECONDS} / 60))m \033[0m"
+echo "\033[32m ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^ ^m^\033[0m"

@@ -13,7 +13,7 @@ echo ""
 #########################
 help_info(){
 	echo "usage:"
-	echo "sh calculateDNAmeInRegions.sh <option>* [-x input_1] [-y input_2] [-r region] [-s strand] [-f fasta] [-c chrome_size] [-o output_path] [-p prefix]"
+	echo "bash calculateDNAmeInRegions.sh <option>* [-x input_1] [-y input_2] [-r region] [-s strand] [-f fasta] [-c chrome_size] [-o output_path] [-p prefix]"
 	echo ""
 	echo "This file is for calculating DNA methylation level for given region (based on Bismark output)."
 	echo "Supporting one file or 2 replicates, strand specific or without strand."
